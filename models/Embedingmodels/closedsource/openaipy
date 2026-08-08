@@ -1,0 +1,24 @@
+# Import tool to create text embeddings using OpenAI
+from langchain_openai import OpenAIEmbeddings
+
+# Import tool to load secret keys from .env file
+from dotenv import load_dotenv
+
+# Load the .env file so we can use our OpenAI API key
+load_dotenv()
+
+# Set up the embedding model
+# dimensions=32 means each text will be turned into a list of 32 numbers
+embedding = OpenAIEmbeddings(model='text-embedding-3-large', dimensions=32)
+
+# Convert the sentence into a 32-number vector  the contexual(embedding)
+result = embedding.embed_query("Delhi is the capital of India")
+
+# Print the vector (list of 32 numbers)
+print(str(result))
+
+# Example of what result might look like (just for illustration, actual numbers will differ):
+# [-0.0123, 0.0456, -0.0789, 0.0234, 0.0567, -0.0345, 0.0123, -0.0456,
+#  0.0678, -0.0234, 0.0345, 0.0567, -0.0123, 0.0456, -0.0678, 0.0234,
+#  0.0345, -0.0567, 0.0123, -0.0456, 0.0678, 0.0234, -0.0345, 0.0567,
+# -0.0123, 0.0456, -0.0678, 0.0234, 0.0345, -0.0567, 0.0123, -0.0456]
